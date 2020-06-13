@@ -1,0 +1,12 @@
+wordlist#:  Tragedy ; word:  bad ; count:  1
+wordlist#:  Tragedy ; word:  pain ; count:  2
+wordlist#:  Tragedy ; word:  terrible ; count:  1
+total count of wordlist#  Tragedy :  4
+wordlist#:  Science ; word:  body ; count:  1
+total count of wordlist#  Science :  1
+wordlist#:  Adventure ; word:  down ; count:  1
+total count of wordlist#  Adventure :  1
+total count of wordlist#  Politics :  0
+wordlist#:  Fantasy ; word:  unicorn ; count:  1
+wordlist#:  Fantasy ; word:  centaur ; count:  3
+total count of wordlist#  Fantasy :  4

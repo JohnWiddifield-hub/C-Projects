@@ -1,0 +1,29 @@
+wordlist#:  Tragedy ; word:  angry ; count:  1
+wordlist#:  Tragedy ; word:  annoy ; count:  1
+wordlist#:  Tragedy ; word:  anxious ; count:  1
+wordlist#:  Tragedy ; word:  apathy ; count:  1
+total count of wordlist#  Tragedy :  4
+total count of wordlist#  Science :  0
+total count of wordlist#  Adventure :  0
+wordlist#:  Politics ; word:  absentee ; count:  1
+wordlist#:  Politics ; word:  accountable ; count:  1
+wordlist#:  Politics ; word:  activist ; count:  1
+wordlist#:  Politics ; word:  adverse ; count:  1
+wordlist#:  Politics ; word:  advertising ; count:  1
+wordlist#:  Politics ; word:  advice ; count:  1
+wordlist#:  Politics ; word:  advise ; count:  1
+wordlist#:  Politics ; word:  affiliation ; count:  1
+wordlist#:  Politics ; word:  aggressive ; count:  1
+wordlist#:  Politics ; word:  amendment ; count:  1
+total count of wordlist#  Politics :  10
+wordlist#:  Fantasy ; word:  angels ; count:  1
+wordlist#:  Fantasy ; word:  demons ; count:  1
+wordlist#:  Fantasy ; word:  dragons ; count:  1
+wordlist#:  Fantasy ; word:  elf ; count:  1
+wordlist#:  Fantasy ; word:  fae ; count:  1
+wordlist#:  Fantasy ; word:  fantasy ; count:  1
+wordlist#:  Fantasy ; word:  fairies ; count:  1
+wordlist#:  Fantasy ; word:  ghost ; count:  1
+wordlist#:  Fantasy ; word:  ghosts ; count:  1
+wordlist#:  Fantasy ; word:  spirit ; count:  1
+total count of wordlist#  Fantasy :  10

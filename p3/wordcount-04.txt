@@ -1,0 +1,14 @@
+wordlist#:  Tragedy ; word:  corrupt ; count:  1
+wordlist#:  Tragedy ; word:  poor ; count:  1
+total count of wordlist#  Tragedy :  2
+total count of wordlist#  Science :  0
+wordlist#:  Adventure ; word:  way ; count:  1
+total count of wordlist#  Adventure :  1
+wordlist#:  Politics ; word:  guns ; count:  1
+wordlist#:  Politics ; word:  political ; count:  2
+wordlist#:  Politics ; word:  military ; count:  2
+wordlist#:  Politics ; word:  war ; count:  1
+wordlist#:  Politics ; word:  democracy ; count:  4
+wordlist#:  Politics ; word:  democracies ; count:  1
+total count of wordlist#  Politics :  11
+total count of wordlist#  Fantasy :  0

@@ -1,0 +1,7 @@
+total count of wordlist#  Tragedy :  0
+total count of wordlist#  Science :  0
+total count of wordlist#  Adventure :  0
+wordlist#:  Politics ; word:  laws ; count:  3
+wordlist#:  Politics ; word:  governors ; count:  1
+total count of wordlist#  Politics :  4
+total count of wordlist#  Fantasy :  0

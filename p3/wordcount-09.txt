@@ -1,0 +1,31 @@
+total count of wordlist#  Tragedy :  0
+total count of wordlist#  Science :  0
+wordlist#:  Adventure ; word:  way ; count:  1
+wordlist#:  Adventure ; word:  straight ; count:  1
+wordlist#:  Adventure ; word:  east ; count:  1
+wordlist#:  Adventure ; word:  coast ; count:  1
+wordlist#:  Adventure ; word:  island ; count:  1
+wordlist#:  Adventure ; word:  sea ; count:  3
+wordlist#:  Adventure ; word:  down ; count:  1
+wordlist#:  Adventure ; word:  side ; count:  1
+wordlist#:  Adventure ; word:  spit ; count:  1
+wordlist#:  Adventure ; word:  anchorage ; count:  1
+wordlist#:  Adventure ; word:  afternoon ; count:  1
+wordlist#:  Adventure ; word:  warm ; count:  1
+wordlist#:  Adventure ; word:  sunny ; count:  2
+wordlist#:  Adventure ; word:  woods ; count:  1
+wordlist#:  Adventure ; word:  thunder ; count:  1
+wordlist#:  Adventure ; word:  surf ; count:  2
+wordlist#:  Adventure ; word:  breeze ; count:  1
+wordlist#:  Adventure ; word:  cool ; count:  1
+wordlist#:  Adventure ; word:  air ; count:  1
+wordlist#:  Adventure ; word:  borders ; count:  1
+wordlist#:  Adventure ; word:  sunny ; count:  2
+wordlist#:  Adventure ; word:  horizon ; count:  1
+wordlist#:  Adventure ; word:  beach ; count:  1
+wordlist#:  Adventure ; word:  foliage ; count:  1
+wordlist#:  Adventure ; word:  boughs ; count:  1
+wordlist#:  Adventure ; word:  chance ; count:  1
+total count of wordlist#  Adventure :  31
+total count of wordlist#  Politics :  0
+total count of wordlist#  Fantasy :  0

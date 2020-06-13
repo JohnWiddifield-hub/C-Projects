@@ -1,0 +1,16 @@
+wordlist#:  Tragedy ; word:  death ; count:  1
+wordlist#:  Tragedy ; word:  grave ; count:  1
+wordlist#:  Tragedy ; word:  hate ; count:  1
+wordlist#:  Tragedy ; word:  hurt ; count:  1
+wordlist#:  Tragedy ; word:  pain ; count:  2
+wordlist#:  Tragedy ; word:  scorn ; count:  1
+wordlist#:  Tragedy ; word:  torture ; count:  1
+total count of wordlist#  Tragedy :  8
+wordlist#:  Science ; word:  time ; count:  1
+total count of wordlist#  Science :  1
+wordlist#:  Adventure ; word:  afternoon ; count:  1
+wordlist#:  Adventure ; word:  pleasure ; count:  1
+total count of wordlist#  Adventure :  2
+total count of wordlist#  Politics :  0
+wordlist#:  Fantasy ; word:  sword ; count:  1
+total count of wordlist#  Fantasy :  1

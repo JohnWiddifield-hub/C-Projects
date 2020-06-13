@@ -1,0 +1,22 @@
+total count of wordlist#  Tragedy :  0
+wordlist#:  Science ; word:  situation ; count:  1
+wordlist#:  Science ; word:  theory ; count:  1
+wordlist#:  Science ; word:  relativity ; count:  2
+wordlist#:  Science ; word:  space ; count:  6
+wordlist#:  Science ; word:  time ; count:  6
+wordlist#:  Science ; word:  dynamic ; count:  1
+wordlist#:  Science ; word:  quantities ; count:  1
+wordlist#:  Science ; word:  body ; count:  1
+wordlist#:  Science ; word:  moves ; count:  1
+wordlist#:  Science ; word:  force ; count:  1
+wordlist#:  Science ; word:  acts ; count:  1
+wordlist#:  Science ; word:  curvature ; count:  1
+wordlist#:  Science ; word:  structure ; count:  1
+wordlist#:  Science ; word:  universe ; count:  3
+wordlist#:  Science ; word:  events ; count:  1
+wordlist#:  Science ; word:  limits ; count:  1
+total count of wordlist#  Science :  29
+wordlist#:  Adventure ; word:  way ; count:  1
+total count of wordlist#  Adventure :  1
+total count of wordlist#  Politics :  0
+total count of wordlist#  Fantasy :  0

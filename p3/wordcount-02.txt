@@ -1,0 +1,11 @@
+total count of wordlist#  Tragedy :  0
+wordlist#:  Science ; word:  time ; count:  1
+wordlist#:  Science ; word:  control ; count:  1
+total count of wordlist#  Science :  2
+wordlist#:  Adventure ; word:  way ; count:  1
+wordlist#:  Adventure ; word:  wild ; count:  1
+total count of wordlist#  Adventure :  2
+total count of wordlist#  Politics :  0
+wordlist#:  Fantasy ; word:  vampire ; count:  1
+wordlist#:  Fantasy ; word:  vampires ; count:  1
+total count of wordlist#  Fantasy :  2
