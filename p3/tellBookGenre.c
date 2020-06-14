@@ -1,7 +1,24 @@
+/*
+  This is the main controller file which controlls the flow of readBook and wordLists in order to
+  read lists of target words for specific genres (science politics tragedys fantasy and adventure)
+  and determine the genre of a given text document (up to 5000 words)
+  @file tellBookGenre.c
+  @author John Widdifield (jfwiddif)
+*/
 #include "wordLists.h"
 #include "readBook.h"
 
-int main( int argc, char *argv[] ) 
+/*
+  This function is the main controller function it will read words from the files
+  science_words.txt political_words.txt tragic_words.txt fantasy_words.txt and
+  adventure_words.txt and match them against the input file reporting which
+  genre or genres have the highest number of matches.
+  @param argc The number of arguments passed by the console
+  @param argv An array containing the arguments passed by the console argv[1] should contain the
+            filename of the input file (book)
+  @return 0 if the program exited successfully and 1 if there was an error that resulted in exit
+*/
+int main( int argc, char *argv[] )
 {
 
   char sciStr[] = "science_words.txt";
@@ -10,12 +27,7 @@ int main( int argc, char *argv[] )
   char fanStr[] = "fantasy_words.txt";
   char advStr[] = "adventure_words.txt";
 
-  FILE *sciFile = fopen("science_words.txt", "r");
-  FILE *polFile = fopen("political_words.txt", "r");
-  FILE *traFile = fopen("tragic_words.txt", "r");
-  FILE *fanFile = fopen("fantasy_words.txt", "r");
-  FILE *advFile = fopen("adventure_words.txt", "r");
-
+  //percent counters numerators out of the maximum number of matched words
   int sciCnt = 0;
   int polCnt = 0;
   int traCnt = 0;
@@ -30,98 +42,101 @@ int main( int argc, char *argv[] )
 
   char bookStor[MAXWORDS][MAXWORDLEN + 1];
 
+  FILE *sciFile = fopen("science_words.txt", "r");
   readWords(sciFile, sciStor, sciStr);
+  FILE *polFile = fopen("political_words.txt", "r");
   readWords(polFile, polStor, polStr);
+  FILE *traFile = fopen("tragic_words.txt", "r");
   readWords(traFile, traStor, traStr);
+  FILE *fanFile = fopen("fantasy_words.txt", "r");
   readWords(fanFile, fanStor, fanStr);
+  FILE *advFile = fopen("adventure_words.txt", "r");
   readWords(advFile, advStor, advStr);
 
   FILE *book = fopen(argv[1], "r");
-  readBookWords(book, bookStor, fanStor, sciStor, advStor, polStor, traStor, &fanCnt, &sciCnt, &advCnt, &polCnt, &traCnt);
+  readBookWords(book, bookStor, fanStor, sciStor, advStor, polStor, traStor, &fanCnt, 
+                &sciCnt, &advCnt, &polCnt, &traCnt);
 
   int recGen[5] = {}; //indeces are truth values for maxes in the order sci, tra, fan, adv, pol
   int max = -1;
-  //find max
-  if(sciCnt > max) {
+  //find maximum percentage of matches per genre
+  if (sciCnt > max) {
     max = sciCnt;
   }
-  if(traCnt > max) {
+  if (traCnt > max) {
     max = traCnt;
   }
-  if(fanCnt > max) {
+  if (fanCnt > max) {
     max = fanCnt;
   }
-  if(advCnt > max) {
+  if (advCnt > max) {
     max = advCnt;
   }
-  if(polCnt > max) {
+  if (polCnt > max) {
     max = polCnt;
+  }
+  if (max == 0) {
+    return EXIT_SUCCESS;
   }
 
   //record which genre the max was and if there were any max ties
-  if(sciCnt == max) {
+  if (sciCnt == max) {
     recGen[0] = 1;
   }
-  if(traCnt == max) {
+  if (traCnt == max) {
     recGen[1] = 1;
   }
-  if(fanCnt == max) {
+  if (fanCnt == max) {
     recGen[2] = 1;
   }
-  if(advCnt == max) {
+  if (advCnt == max) {
     recGen[3] = 1;
   }
-  if(polCnt == max) {
+  if (polCnt == max) {
     recGen[4] = 1;
   }
 
   //print output
   bool printed = false;
-  if(recGen[1]) {
-    if(printed){
-      printf(" Tragedy"); 
+  if (recGen[1]) {
+    if (printed) {
+      printf(" Tragedy");
     } else {
       printf("Tragedy");
       printed = true;
     }
   }
-  if(recGen[0]) {
-    if(printed){
-      printf(" Science"); 
+  if (recGen[0]) {
+    if (printed) {
+      printf(" Science");
     } else {
       printf("Science");
       printed = true;
     }
   }
-  if(recGen[3]) {
-    if(printed){
-      printf(" Adventure"); 
+  if (recGen[3]) {
+    if (printed) {
+      printf(" Adventure");
     } else {
       printf("Adventure");
       printed = true;
     }
   }
-  if(recGen[4]) {
-    if(printed){
-      printf(" Politics"); 
+  if (recGen[4]) {
+    if (printed) {
+      printf(" Politics");
     } else {
       printf("Politics");
       printed = true;
     }
   }
-  if(recGen[2]) {
-    if(printed){
-      printf(" Fantasy"); 
+  if (recGen[2]) {
+    if (printed) {
+      printf(" Fantasy");
     } else {
       printf("Fantasy");
       printed = true;
     }
   }
-  fclose(book);
-  fclose(sciFile);
-  fclose(polFile);
-  fclose(traFile);
-  fclose(advFile);
-  fclose(fanFile);
-  
+  return EXIT_SUCCESS;
 }

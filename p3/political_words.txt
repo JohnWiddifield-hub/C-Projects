@@ -24,7 +24,7 @@ bait
 budget
 ballot
 bandwagon
-barnstorm,
+barnstorm
 beliefs
 biannual
 bias
@@ -42,7 +42,7 @@ civic
 commitments
 committee
 federal
-feud,
+feud
 filibuster
 freedom
 funding
