@@ -8,6 +8,9 @@
 #include "wordLists.h"
 #include "readBook.h"
 
+/* This constant is used in comparing double values up to this precision */
+#define DOUBLE_PREC 0.00001
+
 /*
   This function is the main controller function it will read words from the files
   science_words.txt political_words.txt tragic_words.txt fantasy_words.txt and
@@ -57,42 +60,43 @@ int main( int argc, char *argv[] )
   readBookWords(book, bookStor, fanStor, sciStor, advStor, polStor, traStor, &fanCnt, 
                 &sciCnt, &advCnt, &polCnt, &traCnt);
 
+  double total = sciCnt + advCnt + polCnt + fanCnt + traCnt;
   int recGen[5] = {}; //indeces are truth values for maxes in the order sci, tra, fan, adv, pol
-  int max = -1;
+  double max = -1.0;
   //find maximum percentage of matches per genre
-  if (sciCnt > max) {
-    max = sciCnt;
+  if ((sciCnt/total) > max) {
+    max = sciCnt / total;
   }
-  if (traCnt > max) {
-    max = traCnt;
+  if ((traCnt/total) > max) {
+    max = traCnt / total;
   }
-  if (fanCnt > max) {
-    max = fanCnt;
+  if ((fanCnt/total) > max) {
+    max = fanCnt / total;
   }
-  if (advCnt > max) {
-    max = advCnt;
+  if ((advCnt/total) > max) {
+    max = advCnt / total;
   }
-  if (polCnt > max) {
-    max = polCnt;
+  if ((polCnt/total) > max) {
+    max = polCnt / total;
   }
   if (max == 0) {
     return EXIT_SUCCESS;
   }
 
   //record which genre the max was and if there were any max ties
-  if (sciCnt == max) {
+  if ((max - (sciCnt / total)) < DOUBLE_PREC) {
     recGen[0] = 1;
   }
-  if (traCnt == max) {
+  if ((max - (traCnt / total)) < DOUBLE_PREC) {
     recGen[1] = 1;
   }
-  if (fanCnt == max) {
+  if ((max - (fanCnt / total)) < DOUBLE_PREC) {
     recGen[2] = 1;
   }
-  if (advCnt == max) {
+  if ((max - (advCnt / total)) < DOUBLE_PREC) {
     recGen[3] = 1;
   }
-  if (polCnt == max) {
+  if ((max - (polCnt / total)) < DOUBLE_PREC) {
     recGen[4] = 1;
   }
 
