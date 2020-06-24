@@ -1,0 +1,23 @@
+book d Dune
+book f Fahrenheit
+book mtpod Me Talk Pretty One Day
+book abht A Brief History of Time
+book ohb Of Human Bondage
+book tr The Road
+book u Unbroken
+book vd Valley of the Dolls
+salesperson jb Jenny Baxter
+sale jb ohb 3
+sale jb tr 2
+sale jb u 1
+sale jb d 5
+sale jb d 2
+sale jb f 6
+sale jb mtpod 7
+sale jb abht 2
+sale jb f 1
+sale jb u 4
+sale jb vd 3
+sale jb vd 6
+list salesperson jb
+quit

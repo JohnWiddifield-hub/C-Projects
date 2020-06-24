@@ -1,0 +1,29 @@
+book d Dune
+book f Fahrenheit
+book mtpod Me Talk Pretty One Day
+book abht A Brief History of Time
+book ohb Of Human Bondage
+book tr The Road
+book u Unbroken
+book vd Valley of the Dolls
+book gg Gone Girl
+salesperson jb Jenny Baxter
+salesperson sp Sarah Patel
+salesperson amb Anna Marie Bradley
+salesperson jj Josie Jones
+sale sp gg 3
+sale jb tr 2
+sale jj f 1
+sale jb gg 5
+sale amb abht 2
+sale jb d 6
+sale amb ohb 7
+sale jj mtpod 2
+sale jb ohb 1
+sale jj f 4
+sale jj u 5
+sale jj gg 5
+sale jb tr 3
+sale sp abht 7
+list books
+quit

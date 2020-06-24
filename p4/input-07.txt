@@ -1,0 +1,6 @@
+salesperson ams Anna Mary Smith
+salesperson bb Betty Brooks
+salesperson cd Clare Dominguez
+salesperson dp Donna Patel
+salesperson ef Ellen Ferris
+list group
