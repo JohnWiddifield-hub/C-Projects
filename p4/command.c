@@ -102,7 +102,7 @@ bool processCommand( Group *group )
     scanf("%s", id);
     //check if id is the correct length and if it doesn't already exists in the list
     if (strlen(id) <= MAX_ID && getBook(group, id) == NULL && strlen(id) > 0) {
-      char name[MAX_NAME + 1];
+      char name[CHAR_MAX];
       scanf(" %[A-Za-z\' ]s", name);
       if (strlen(name) <= MAX_NAME && strlen(name) > 0) {
         //passes all tests create book and add it to group
@@ -128,8 +128,9 @@ bool processCommand( Group *group )
     }
   //salesperson command
   } else if (strcmp(com, "salesperson") == 0) {
-    char id[MAX_ID + 1] = " ";
+    char id[MAX_NAME + 1] = " ";
     scanf("%s", id);
+    //id[MAX_ID] = '\0';
     //check if id is the correct length and if it doesn't already exists in the list
     if (strlen(id) <= MAX_ID && getSalesperson(group, id) == NULL && strlen(id) > 0) {
       char name[MAX_NAME + 1];
@@ -162,7 +163,13 @@ bool processCommand( Group *group )
     char bk[MAX_ID + 1] = "";
     char sp[MAX_ID + 1] = "";
     int numSold = 0;
-    if (scanf("%5s%5s%d", sp, bk, &numSold) != 3) {
+    if (scanf("%5s", sp) != 1) {
+      return false;
+    }
+    if (scanf("%5s", bk) != 1) {
+      return false;
+    }
+    if (scanf("%d", &numSold) != 1) {
       return false;
     }
     if (getSalesperson(group, sp) == NULL || getBook(group, bk) == NULL || numSold < 1) {

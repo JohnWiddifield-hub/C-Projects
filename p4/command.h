@@ -4,6 +4,7 @@ This allows the user to type commands to modify the group given by the tracker
 @author John Widdifield (jfwiddif)
 */
 #include "model.h"
+#include <limits.h>
 /**
 This function will process user input to modify the group of salespeople and their
 sales using the following base commands: book, salesperson, sale, list books, list group,
