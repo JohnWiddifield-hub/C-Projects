@@ -90,7 +90,6 @@ static int spComp(const void *aptr, const void *bptr)
 
 bool processCommand( Group *group )
 {
-  char toss = ' ';
   static int comNum = 1;
   char com[MAX_NAME + 1] = "";
   printf("%d> ", comNum);
@@ -122,17 +121,9 @@ bool processCommand( Group *group )
           return true;
         }
       } else {
-        printf("\nInvalid command\n");
-        while (toss != '\n') {
-          toss = getchar();
-        }
         return false;
       }
     } else {
-      printf("\nInvalid command\n");
-      while (toss != '\n') {
-        toss = getchar();
-      }
       return false;
     }
   //salesperson command
@@ -161,17 +152,9 @@ bool processCommand( Group *group )
           return true;
         }
       } else {
-        printf("\nInvalid command\n");
-        while (toss != '\n') {
-          toss = getchar();
-        }
         return false;
       }
     } else {
-      printf("\nInvalid command\n");
-      while (toss != '\n') {
-        toss = getchar();
-      }
       return false;
     }
   //sale command
@@ -180,17 +163,9 @@ bool processCommand( Group *group )
     char sp[MAX_ID + 1] = "";
     int numSold = 0;
     if (scanf("%5s%5s%d", sp, bk, &numSold) != 3) {
-      printf("\nInvalid command\n");
-      while (toss != '\n') {
-        toss = getchar();
-      }
       return false;
     }
     if (getSalesperson(group, sp) == NULL || getBook(group, bk) == NULL || numSold < 1) {
-      printf("\nInvalid command\n");
-      while (toss != '\n') {
-        toss = getchar();
-      }
       return false;
     }
     getBook(group, bk)->sold += numSold;
@@ -204,10 +179,6 @@ bool processCommand( Group *group )
   } else if (strcmp(com, "list") == 0) {
     char lCom[MAX_NAME] = "";
     if (scanf("%s", lCom) != 1) {
-      printf("\nInvalid command\n");
-      while (toss != '\n') {
-        toss = getchar();
-      }
       return false;
     }
     if (strcmp(lCom, "books") == 0) {
@@ -228,17 +199,9 @@ bool processCommand( Group *group )
       printf("\n");
       char id[MAX_ID + 1];
       if (scanf("%s", id) != 1) {
-        printf("\nInvalid command\n");
-        while (toss != '\n') {
-          toss = getchar();
-        }
         return false;
       }
       if (getSalesperson(group, id) == NULL) {
-        printf("\nInvalid command\n");
-        while (toss != '\n') {
-          toss = getchar();
-        }
         return false;
       }
       int total = 0;
@@ -263,10 +226,6 @@ bool processCommand( Group *group )
       printf("Total                                     %9d\n", total);
       return true;
     } else {
-      printf("\nInvalid command\n");
-      while (toss != '\n') {
-        toss = getchar();
-      }
       return false;
     }
 

@@ -13,8 +13,16 @@ cancelled
 int main()
 {
   Group *gp = createGroup();
+  char toss = ' ';
   while (true) {
-    processCommand(gp);
+    if (processCommand(gp)) {
+      continue;
+    } else {
+      printf("\nInvalid command\n");
+      while (toss != '\n') {
+        toss = getchar();
+      }
+    }
   }
   freeGroup(gp);
   return EXIT_SUCCESS;
