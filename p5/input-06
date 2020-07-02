@@ -1,0 +1,692 @@
+// Demonstration of a technique for inheritance in C.  Internally,
+// this is sort of how languages like C++ and Java provide inheritance
+// and function overriding.
+
+// There are more sophisticated ways to do this, better for larger
+// projects, but this is not a bad approach for a first look at object
+// orientation in C.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+/************************************************************************
+ * Base class, Cell, just holds a field for the width of the cell.
+ ************************************************************************/
+typedef struct {
+  // Width of the cell.
+  int width;
+} Cell;
+
+// Like a constructor for a Cell.  Dynamically allocate it, fill in
+// its field and return a pointer to a new Cell object.
+Cell *makeCell( int width )
+{
+  // Allocate a Cell and fill in its fields (just one)
+  Cell *this = (Cell *)malloc( sizeof( Cell ) );
+  this->width = width;
+  return this;
+}
+
+/************************************************************************
+ * Derived class (subclass), Money keeps all the same fields as Cell
+ * (in the same layout).  It adds a field for storign a monetary value
+ * in the memory after the fields inherited from the base class.
+ ************************************************************************/
+typedef struct {
+  // Field "inherited" from Cell
+  int width;
+
+  // A new field for storing a monetory value.
+  int val;
+} Money;
+
+// Like a constructor for Money.  Create, initialize and return a pointer
+// to a new Money object.
+Money *makeMoney( int width, int val )
+{
+  // Allocate a Money object and fill in its fields
+  Money *this = (Money *)malloc( sizeof( Money ) );
+  this->width = width;
+  this->val = val;
+  return this;
+}
+
+/**********************************************************************/
+
+// A utilitiy fuction to print a horizontal separator between rows of the
+// spreadsheet.
+void printSeparator( Cell *row[], int len )
+{
+  for ( int i = 0; i < 3; i++ ) {
+    printf( "+" );
+    // As in main, we're getting the width field out of each cell.
+    int width = row[ i ]->width;
+    for ( int j = 0; j < width; j++ )
+      printf( "-" );
+  }
+  printf( "+\n" );
+}
+
+int main()
+{
+  // A grid of cells in our spreadsheet.
+  Cell *sheet[ 2 ][ 3 ];
+
+  // Fill in cells of the spreadsheet.  Notice, we have to cast here
+  // for anything that's not a real Cell pointer.  The programming
+  // language doesn't really know about the object orientation tricks
+  // we're doing. ... It would sure be nice if we had a language that
+  // did. ...
+  sheet[ 0 ][ 0 ] = makeCell( 10 );
+  sheet[ 0 ][ 1 ] = (Cell *) makeMoney( 12, 375 );
+  sheet[ 0 ][ 2 ] = makeCell( 16 );
+
+  sheet[ 1 ][ 0 ] = makeCell( 10 );
+  sheet[ 1 ][ 1 ] = (Cell *) makeMoney( 12, 890 );
+  sheet[ 1 ][ 2 ] = makeCell( 16 );
+
+  // Print out an outline for the cells.
+  for ( int i = 0; i < 2; i++ ) {
+    printSeparator( sheet[ i ], 3 );
+    for ( int j = 0; j < 3; j++ ) {
+      // Here, we're just printing space for the conents of each cell.
+      // Every cell has a width field, (at the same offset from the
+      // start of the struct), so we can access it using the same
+      // code, even though some of these point to Cell instances and
+      // some point to Money.
+      Cell  *c = sheet[ i ][ j ];
+      printf( "|%*s", c->width, "" );
+    }
+    printf( "|\n" );
+  }
+  printSeparator( sheet[ 1 ], 3 );
+  
+
+  // These objects are all dynamically allocated.  We should free
+  // their memory.  Good thing free doesn't require us to say how much
+  // memory we're freeing, since these objects are really of different
+  // sizes.
+  for ( int i = 0; i < 2; i++ ) {
+    for ( int j = 0; j < 3; j++ ) {
+      free( sheet[ i ][ j ] );
+    }
+  }
+  
+  return 0;
+}
+// Demonstration of how we could do regular-old member functions
+// (methods) in C, with the illusion that derived classes inherit the
+// function.  Really, we already did the hard work for this when we
+// wrote the previous version of the program.
+
+// This version adds a member function to the base class, getWidth(),
+// to return the value of the width field, so client code doesn't have
+// to directly access the field.  Since derived classes have the same
+// memory layout for this field, they can access the field using the
+// same function..  All the code from the previous version is here,
+// but I've reduced the commenting a little.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+/************************************************************************
+ * Base class, Cell, just holds a field for the width of the cell.
+ ************************************************************************/
+typedef struct {
+  // Width of the cell.
+  int width;
+} Cell;
+
+// Make a new Cell.
+Cell *makeCell( int width )
+{
+  // Allocate a Cell and fill in its fields (just one)
+  Cell *this = (Cell *)malloc( sizeof( Cell ) );
+  this->width = width;
+  return this;
+}
+
+// Here's the member function.  It only uses the fields that are part
+// of Cell, so any object that starts with the same memory structure
+// can use this function.
+int getWidth( Cell *this )
+{
+  return this->width;
+}
+
+/************************************************************************
+ * Derived class, Money, adds a monetary value.
+ ************************************************************************/
+typedef struct {
+  // Field "inherited" from Cell
+  int width;
+
+  // A new field for storing a monetory value.
+  int val;
+} Money;
+
+// Make a new Money object.
+Money *makeMoney( int width, int val )
+{
+  // Allocate a Money object and fill in its fields
+  Money *this = (Money *)malloc( sizeof( Money ) );
+  this->width = width;
+  this->val = val;
+  return this;
+}
+
+/**********************************************************************/
+
+// Print a horizontal ceparator between between rows of output.
+void printSeparator( Cell *row[], int len )
+{
+  for ( int i = 0; i < 3; i++ ) {
+    printf( "+" );
+    // As in main, this is like calling a method on each cell.
+    for ( int j = 0; j < getWidth( row[ i ] ); j++ )
+      printf( "-" );
+  }
+  printf( "+\n" );
+}
+
+int main()
+{
+  // A grid of cells in our spreadsheet.
+  Cell *sheet[ 2 ][ 3 ];
+
+  // Fill in the cells with different objects.
+  sheet[ 0 ][ 0 ] = makeCell( 10 );
+  sheet[ 0 ][ 1 ] = (Cell *) makeMoney( 12, 375 );
+  sheet[ 0 ][ 2 ] = makeCell( 16 );
+
+  sheet[ 1 ][ 0 ] = makeCell( 10 );
+  sheet[ 1 ][ 1 ] = (Cell *) makeMoney( 12, 890 );
+  sheet[ 1 ][ 2 ] = makeCell( 16 );
+
+  // Print out an outline for the cells.
+  for ( int i = 0; i < 2; i++ ) {
+    printSeparator( sheet[ i ], 3 );
+    for ( int j = 0; j < 3; j++ ) {
+      // Here, we're calling the member function rather than accessing
+      // the width field directly.  As before, this works because the
+      // Cell part of every object has the same memory layout, even
+      // though cells point to different types of objects.
+      Cell  *c = sheet[ i ][ j ];
+      printf( "|%*s", getWidth( c ), "" );
+    }
+    printf( "|\n" );
+  }
+  printSeparator( sheet[ 1 ], 3 );
+  
+
+  // Free memory for every cell object.
+  for ( int i = 0; i < 2; i++ ) {
+    for ( int j = 0; j < 3; j++ ) {
+      free( sheet[ i ][ j ] );
+    }
+  }
+  
+  return 0;
+}
+// Demonstration of overriding a function. In C++, this would be
+// called a virtual function, a function that can be implemented
+// differently for each of its derived classes.  The base class now
+// contains a pointer to a function to use for printing.  Derived
+// classes can plug in their own value for this field to get
+// class-specific behavior.
+
+// Like the previous examples, there are more sophisticated ways to do
+// this, but, hopefully, this one will be easy to understand.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+/************************************************************************
+ * Base class, Cell, now with a width field and a pointer to a function for
+ * printing cells.
+ ************************************************************************/
+typedef struct CellTag {
+  // Pointer to a function to use for printing a cell.
+  void (*print)( struct CellTag * );
+
+  // Width of the cell.
+  int width;
+} Cell;
+
+// Actual function used to print the base class.  Every instance of Cell will
+// carry aorund a pointer to this function.
+void printCell( Cell *this ) {
+  // Just print an empty cell of the right width.
+  printf( "%*s", this->width, "" );
+}
+
+// Make a new Cell.
+Cell *makeCell( int width )
+{
+  // Allocate a Cell and fill in its fields, the width and the pointer ot its print
+  // function.
+  Cell *this = (Cell *)malloc( sizeof( Cell ) );
+
+  // Fill in the pointer to our print function.
+  this->print = printCell;
+
+  this->width = width;
+  return this;
+}
+
+// Member function of Cell to return the width field.
+int getWidth( Cell *this )
+{
+  return this->width;
+}
+
+/************************************************************************
+ * Derived class (subclass), Money keeps all the same fields as Cell
+ * (in the same layout).  It adds a field for storign a monetary value
+ * in the memory after the fields inherited from the base class.
+ ************************************************************************/
+typedef struct {
+  // Fields "inherited" from Cell, with the same layout in memory.
+  void (*print)( Cell * );
+  int width;
+
+  // A monetory value to display
+  int val;
+} Money;
+
+// Actual function used to print the Money class.  Every instance of
+// Money will carry around a pointer to this function in its print
+// field.
+void printMoney( Cell *cell ) {
+  // If this function gets called, the parameter must really be a pointer to 
+  // a Money object.  Let's cast it to the more specific type.
+  Money *this = (Money *)cell;
+  
+  // Print the contents of this cell, as money (would be nice to add a $)
+  printf( "%*d.%02d", this->width - 3, this->val / 100, this->val % 100 );
+}
+
+// Make a new Money object.
+Money *makeMoney( int width, int val )
+{
+  // Allocate a Money object and fill in its fields
+  Money *this = (Money *)malloc( sizeof( Money ) );
+
+  // Fill in the pointer to our print function.
+  this->print = printMoney;
+
+  this->width = width;
+  this->val = val;
+  return this;
+}
+
+/**********************************************************************/
+
+// Print a horizontal ceparator between between rows of output.
+void printSeparator( Cell *row[], int len )
+{
+  for ( int i = 0; i < 3; i++ ) {
+    printf( "+" );
+    // As in main, this is like calling a method on each cell.
+    for ( int j = 0; j < getWidth( row[ i ] ); j++ )
+      printf( "-" );
+  }
+  printf( "+\n" );
+}
+
+int main()
+{
+  // A grid of cells in our spreadsheet.
+  Cell *sheet[ 2 ][ 3 ];
+
+  // Fill in cells with some object pointers.
+  sheet[ 0 ][ 0 ] = makeCell( 10 );
+  sheet[ 0 ][ 1 ] = (Cell *) makeMoney( 12, 375 );
+  sheet[ 0 ][ 2 ] = makeCell( 16 );
+
+  sheet[ 1 ][ 0 ] = makeCell( 10 );
+  sheet[ 1 ][ 1 ] = (Cell *) makeMoney( 12, 890 );
+  sheet[ 1 ][ 2 ] = makeCell( 16 );
+
+  // Print out an outline for the cells.
+  for ( int i = 0; i < 2; i++ ) {
+    printSeparator( sheet[ i ], 3 );
+    for ( int j = 0; j < 3; j++ ) {
+      printf( "|" );
+
+      // Get the current element of the spreadsheet (this is really just to
+      // simplify the syntax of the next line).
+      Cell *c = sheet[ i ][ j ];
+
+      // Call its print function, passing in the object it's supposed to print.
+      c->print( c );
+    }
+    printf( "|\n" );
+  }
+  printSeparator( sheet[ 1 ], 3 );
+
+  // Free memory for every cell object.
+  for ( int i = 0; i < 2; i++ ) {
+    for ( int j = 0; j < 3; j++ ) {
+      free( sheet[ i ][ j ] );
+    }
+  }
+  
+  return 0;
+}
+// Adding another derived class of Cell, containing some dynamically
+// allocated memory.  This requires a virtual function for freeing the
+// memory.
+
+// Like the previous examples, there are more sophisticated ways to do
+// this, but, hopefully, this one will be easy to understand.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+
+/************************************************************************
+ * Base class, Cell, now with two pointer to functions.
+ ************************************************************************/
+typedef struct CellTag {
+  // Pointer to a function to use for printing a cell.
+  void (*print)( struct CellTag * );
+
+  // Pointer to a function to use for freeing the memory of a cell.
+  void (*destroy)( struct CellTag * );
+
+  // Width of the cell.
+  int width;
+} Cell;
+
+// Function to print a Cell
+void printCell( Cell *this ) {
+  // Just print an empty cell of the right width.
+  printf( "%*s", this->width, "" );
+}
+
+// Function to free a Cell.
+void destroyCell( Cell *this ) {
+  free( this );
+}
+
+// Make a new Cell.
+Cell *makeCell( int width )
+{
+  // Allocate a Cell and fill in its fields, the width and the pointer ot its print
+  // function.
+  Cell *this = (Cell *)malloc( sizeof( Cell ) );
+
+  // Fill in pointers to our functions.
+  this->print = printCell;
+  this->destroy = destroyCell;
+
+  this->width = width;
+  return this;
+}
+
+// Member function of Cell to return the width field.
+int getWidth( Cell *this )
+{
+  return this->width;
+}
+
+/************************************************************************
+ * Derived class, Money, adds a monetary value.
+ ************************************************************************/
+typedef struct {
+  // Fields "inherited" from Cell, with the same layout in memory.
+  void (*print)( Cell * );
+  void (*destroy)( Cell * );
+  int width;
+
+  // A monetory value to display
+  int val;
+} Money;
+
+// Function used to print a Money value.
+void printMoney( Cell *cell ) {
+  // Get Cell as a more specific type.
+  Money *this = (Money *)cell;
+  
+  // Print the contents of this cell, as money (would be nice to add a $)
+  printf( "%*d.%02d", this->width - 3, this->val / 100, this->val % 100 );
+}
+
+// Function to free a Money object
+void destroyMoney( Cell *this ) {
+  free( this );
+}
+
+// Make a new Money object.
+Money *makeMoney( int width, int val )
+{
+  // Allocate a Circle and fill in its fields
+  Money *this = (Money *)malloc( sizeof( Money ) );
+
+  // Fill in the pointers to our functions.
+  this->print = printMoney;
+  this->destroy = destroyMoney;
+
+  this->width = width;
+  this->val = val;
+  return this;
+}
+
+/************************************************************************
+ * Derived class, Text, stores an arbitrary string.
+ ************************************************************************/
+typedef struct {
+  // Fields "inherited" from Cell, with the same layout in memory.
+  void (*print)( Cell * );
+  void (*destroy)( Cell * );
+  int width;
+
+  // A copy of a string given at creation time.
+  char *str;
+} Text;
+
+// Function used to print a Text value.
+void printText( Cell *cell ) {
+  // Get Cell as a more specific type.
+  Text *this = (Text *)cell;
+  
+  // Print the contents of this cell
+  printf( "%*s", this->width, this->str );
+}
+
+// Function to free a Text object
+void destroyText( Cell *cell ) {
+  // Get Cell as a more specific type.
+  Text *this = (Text *)cell;
+
+  // Free the string we contain.
+  free( this->str );
+
+  // Then free the memory for the Text struct itself.
+  free( this );
+}
+
+// Make a new Text object, keeping a copy of the give string.
+Text *makeText( int width, char const *str )
+{
+  // Allocate a Text object and fill in its fields
+  Text *this = (Text *)malloc( sizeof( Text ) );
+
+  // Fill in the pointers to our functions.
+  this->print = printText;
+  this->destroy = destroyText;
+
+  this->width = width;
+
+  // Copy the string passed in to us.
+  this->str = (char *)malloc( strlen( str ) + 1 );
+  strcpy( this->str, str );
+
+  return this;
+}
+
+/**********************************************************************/
+
+// Print a horizontal ceparator between between rows of output.
+void printSeparator( Cell *row[], int len )
+{
+  for ( int i = 0; i < 3; i++ ) {
+    printf( "+" );
+    // As in main, this is like calling a method on each cell.
+    for ( int j = 0; j < getWidth( row[ i ] ); j++ )
+      printf( "-" );
+  }
+  printf( "+\n" );
+}
+
+int main()
+{
+  // A grid of cells in our spreadsheet.
+  Cell *sheet[ 2 ][ 3 ];
+
+  // Fill in cells with some object pointers.
+  sheet[ 0 ][ 0 ] = makeCell( 10 );
+  sheet[ 0 ][ 1 ] = (Cell *) makeMoney( 12, 375 );
+  sheet[ 0 ][ 2 ] = (Cell *) makeText( 16, "Gum" );
+
+  sheet[ 1 ][ 0 ] = makeCell( 10 );
+  sheet[ 1 ][ 1 ] = (Cell *) makeMoney( 12, 890 );
+  sheet[ 1 ][ 2 ] = (Cell *) makeText( 16, "Sandwich" );
+
+  // Print out an outline for the cells.
+  for ( int i = 0; i < 2; i++ ) {
+    printSeparator( sheet[ i ], 3 );
+    for ( int j = 0; j < 3; j++ ) {
+      printf( "|" );
+
+      // Call this cell's function to print itself.
+      Cell *c = sheet[ i ][ j ];
+      c->print( c );
+    }
+    printf( "|\n" );
+  }
+  printSeparator( sheet[ 1 ], 3 );
+
+  // Ask all the cells to free themselves.
+  for ( int i = 0; i < 2; i++ ) {
+    for ( int j = 0; j < 3; j++ ) {
+      // Call this cell's function to free itself.
+      Cell *c = sheet[ i ][ j ];
+      c->destroy( c );
+    }
+  }
+  
+  return 0;
+}
+// A (potentially unbalanced) tree implemented in C, using
+// pointer-to-pointer to simplify insertion.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+// Node for building trees.
+struct NodeTag {
+  // Value in this node.
+  int value;
+
+  // Pointer to the left and right subtrees.
+  struct NodeTag *left, *right;
+};
+
+// A short type name to use for a node.
+typedef struct NodeTag Node;
+
+// Struct containing the whole tree
+typedef struct {
+  // Root of the tree.
+  Node *root;
+} Tree;
+
+// Inser the given value into the tree.
+bool insert( Tree *tree, int val )
+{
+  // Pointer to the link we'll have to change to insert a value.
+  Node **link = &tree->root;
+
+  // Walk down to the null pointer where we
+  // may insert this value.
+  while ( *link ) {
+    // Is it already in the tree?
+    if ( (*link)->value == val )
+      return false;
+
+    // Go into left or right subtree.
+    if ( val < (*link)->value )
+      link = &(*link)->left;
+    else
+      link = &(*link)->right;
+  }
+
+  // Make a new node with this value.
+  Node *n = (Node *)malloc( sizeof( Node ) );
+  n->value = val;
+  n->left = n->right = NULL;
+
+  // Make this pointer poit to it.
+  *link = n;
+  return true;
+}
+
+// Recursive traversal to print the values in the tree.
+void printValues( Node *n )
+{
+  if ( n ) {
+    // Inorder traversal, print the left subtree
+    printValues( n->left );
+    // Then the value at this node
+    printf( "%d ", n->value );
+    // Then the right subtree.
+    printValues( n->right );
+  }
+}
+
+// Print the tree, using indentation to show the structure.
+void printTree( Node *n, int depth )
+{
+  if ( n ) {
+    // We print the subtrees backward here, so you can lean
+    // your head to the left and read the left (bottom) to right (top)
+    // structure of the tree.
+    // Then the value at this node, indented
+    printTree( n->right, depth + 1 );
+    for ( int i = 0; i < depth; i++ )
+      printf( "  " );
+    printf( "%d\n", n->value );
+    printTree( n->left, depth + 1 );
+  }
+}
+
+int main()
+{
+  // Make a tree.  Again, something like a constructor would be better.
+  Tree tree = { NULL };
+
+  // Add a few values to the tree.
+  insert( &tree, 21 );
+  insert( &tree, 50 );
+  insert( &tree, 75 );
+  insert( &tree, 18 );
+  insert( &tree, 42 );
+  insert( &tree, 9 );
+  insert( &tree, 103 );
+
+  // Print out the values in sorted order.  This requires a traversal.
+  printValues( tree.root );
+  printf( "\n\n" );
+  
+  // Print out the shape of the tree (well, sort of)
+  printTree( tree.root, 0 );
+  
+  return 0;
+}

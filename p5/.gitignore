@@ -1,0 +1,6 @@
+deflate
+inflate
+compressed.bin
+original
+stdout.txt
+stderr.txt

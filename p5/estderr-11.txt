@@ -1,0 +1,1 @@
+usage: deflate <code-file> <infile> <outfile>
