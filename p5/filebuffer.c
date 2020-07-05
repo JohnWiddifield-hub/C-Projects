@@ -69,7 +69,7 @@ FileBuffer *loadFileBuffer( char const *filename )
   FILE *fp = fopen(filename, "rb");
 
   if ( fp == NULL ) {
-    printf("loadFileBuffer failed because it couldn't open a file");
+    fprintf(stderr, "Invalid input file: %s", filename);
     freeFileBuffer(buff);
     exit(EXIT_FAILURE);
   }
@@ -94,7 +94,7 @@ void saveFileBuffer( FileBuffer *buffer, char const *filename )
 {
   FILE *fp = fopen(filename, "wb");
   if ( fp == NULL ) {
-    printf("saveFileBuffer failed because it couldn't open a file");
+    fprintf(stderr, "Invalid output file: %s", filename);
     freeFileBuffer(buffer);
     exit(EXIT_FAILURE);
   }
