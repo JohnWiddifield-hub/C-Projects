@@ -1,0 +1,7 @@
+Empty lines
+Are used to increase readability.
+
+We have put an empty line
+Above and below.
+
+Okay. Bye.

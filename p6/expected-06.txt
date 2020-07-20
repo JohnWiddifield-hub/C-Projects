@@ -1,0 +1,4 @@
+line 1 : Apples are
+line 3 : an apple contains
+line 4 : around 52
+line 7 : An apple
