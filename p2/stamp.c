@@ -31,15 +31,21 @@ int main()
   for(int i = 0; i < num_customers; i++) {
     scanf("%d", &cust_list[i]);
     if(cust_list[i] > MAX_VALID){
+      free(cust_list);
+      free(stamp_list);
       return EXIT_FAILURE;
     }
   }
 
   if(!validateDenom(num_stamps, stamp_list)) {
     printf("Invalid denomination");
+    free(cust_list);
+    free(stamp_list);
     return EXIT_FAILURE; 
   } else if(!validateTypes(num_stamps, stamp_list)) {
     printf("Invalid number of types");
+    free(cust_list);
+    free(stamp_list);
     return EXIT_FAILURE;
   }
 
