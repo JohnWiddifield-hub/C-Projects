@@ -1,0 +1,15 @@
+  1 PRINTF(3)                Linux Programmer's Manual                PRINTF(3)
+  4        printf,  fprintf,  dprintf,  sprintf,  snprintf,  vprintf, vfprintf,
+ 10        int printf(const char *format, ...);
+ 37        The functions in the printf() family produce output according  to  a
+ 38        format  as  described  below.   The functions printf() and vprintf()
+ 51        vsnprintf() are equivalent to  the  functions  printf(),  fprintf(),
+ 91            printf("%*d", width, num);
+ 95            printf("%2$*1$d", width, num);
+113                printf("%'.2f", 1234567.89);
+404        |printf(), fprintf(),    | Thread safety | MT-Safe locale |
+411        fprintf(),  printf(),  sprintf(), vprintf(), vfprintf(), vsprintf():
+458        Code such as printf(foo); often indicates a bug, since foo may  con
+460        contain %n, causing the printf() call to write to memory and  creat
+536        printf(1),   asprintf(3),   puts(3),  scanf(3),  setlocale(3),  str
+545 GNU                              2017-09-15                       PRINTF(3)

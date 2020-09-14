@@ -1,0 +1,322 @@
+  1 PRINTF(3)                Linux Programmer's Manual                PRINTF(3)
+  2 
+  3 NAME
+  4        printf,  fprintf,  dprintf,  sprintf,  snprintf,  vprintf, vfprintf,
+  5        vdprintf, vsprintf, vsnprintf - formatted output conversion
+  6 
+  7 SYNOPSIS
+  8        #include <stdio.h>
+  9 
+ 10        int printf(const char *format, ...);
+ 11        int fprintf(FILE *stream, const char *format, ...);
+ 12        int dprintf(int fd, const char *format, ...);
+ 13        int sprintf(char *str, const char *format, ...);
+ 14        int snprintf(char *str, size_t size, const char *format, ...);
+ 15 
+ 16        #include <stdarg.h>
+ 17 
+ 18        int vprintf(const char *format, va_list ap);
+ 19        int vfprintf(FILE *stream, const char *format, va_list ap);
+ 20        int vdprintf(int fd, const char *format, va_list ap);
+ 21        int vsprintf(char *str, const char *format, va_list ap);
+ 22        int vsnprintf(char *str, size_t size, const char *format, va_list ap);
+ 23 
+ 24    Feature Test Macro Requirements for glibc (see feature_test_macros(7)):
+ 25 
+ 26        snprintf(), vsnprintf():
+ 27            _XOPEN_SOURCE >= 500 || _ISOC99_SOURCE ||
+ 28                || /* Glibc versions <= 2.19: */ _BSD_SOURCE
+ 29 
+ 30        dprintf(), vdprintf():
+ 31            Since glibc 2.10:
+ 32                _POSIX_C_SOURCE >= 200809L
+ 33            Before glibc 2.10:
+ 34                _GNU_SOURCE
+ 35 
+ 36 DESCRIPTION
+ 42        str.
+ 43 
+ 45        puts to a file descriptor, fd, instead of to a stdio stream.
+ 46 
+ 49 
+ 52        dprintf(), sprintf(), snprintf(), respectively, except that they are
+ 53        called with a va_list instead of a  variable  number  of  arguments.
+ 56        stdarg(3).
+ 57 
+ 59        mat string that specifies how  subsequent  arguments  (or  arguments
+ 61        are converted for output.
+ 62 
+ 64        call  to  sprintf(),  snprintf(),  vsprintf(),  or vsnprintf() would
+ 65        cause copying to take place between objects that overlap  (e.g.,  if
+ 68 
+ 72        or more directives: ordinary characters (not %),  which  are  copied
+ 74        of which results in fetching  zero  or  more  subsequent  arguments.
+ 76        ends with a conversion specifier.  In between there may be (in  this
+ 77        order)  zero  or  more  flags,  an  optional minimum field width, an
+ 79 
+ 84        an error if insufficiently many arguments are given).  One can  also
+ 85        specify  explicitly  which argument is taken, at each place where an
+ 89        Thus,
+ 90 
+ 91            printf("%*d", width, num);
+ 92 
+ 94 
+ 95            printf("%2$*1$d", width, num);
+ 96 
+100        using '$' is used, it must be used throughout  for  all  conversions
+102        be mixed with "%%" formats, which do not consume an argument.  There
+106 
+107        For  some numeric conversions a radix character ("decimal point") or
+111        grouping character.  Thus,
+112 
+113                printf("%'.2f", 1234567.89);
+114 
+117 
+118    Flag characters
+120 
+123               zero (by prefixing a 0 if it was not zero  already).   For  x
+125               "0X" for X conversions) prepended to it.  For a, A, e, E,  f,
+127               decimal point, even if no digits follow it (normally, a deci
+132 
+139               ior is undefined.
+140 
+145               are given.
+146 
+147        ' '    (a space) A blank should be left before a positive number (or
+148               empty string) produced by a signed conversion.
+149 
+150        +      A  sign (+ or -) should always be placed before a number pro
+151               duced by a signed conversion.  By default,  a  sign  is  used
+152               only for negative numbers.  A + overrides a space if both are
+153               used.
+154 
+156        Single UNIX Specification specifies one further flag character.
+157 
+160               information  indicates  any.   (See setlocale(3).)  Note that
+162               issue a warning.  (SUSv2 did not include %'F, but SUSv3 added
+163               it.)
+164 
+165        glibc 2.2 adds one further flag character.
+166 
+168               locale's  alternative  output  digits,  if any.  For example,
+170               Persian ("fa_IR") locale.
+171 
+172    Field width
+173        An optional decimal digit string (with nonzero first digit) specify
+177        a  decimal digit string one may write "*" or "*m$" (for some decimal
+180        type int.  A negative field width is taken as a '-' flag followed by
+181        a  positive  field  width.   In  no case does a nonexistent or small
+185 
+186    Precision
+188        optional  decimal  digit  string.  Instead of a decimal digit string
+189        one may write "*" or "*m$" (for some decimal integer m)  to  specify
+199 
+200    Length modifier
+201        Here,  "integer  conversion"  stands for d, i, o, u, x, or X conver
+202        sion.
+203 
+204        hh     A following integer conversion corresponds to a  signed  char
+205               or unsigned char argument, or a following n conversion corre
+206               sponds to a pointer to a signed char argument.
+207 
+208        h      A following integer conversion corresponds to a short int  or
+209               unsigned short int argument, or a following n conversion cor
+210               responds to a pointer to a short int argument.
+211 
+212        l      (ell) A following integer conversion corresponds  to  a  long
+213               int  or  unsigned long int argument, or a following n conver
+214               sion corresponds to a pointer to a long int  argument,  or  a
+215               following c conversion corresponds to a wint_t argument, or a
+216               following s conversion corresponds to a  pointer  to  wchar_t
+217               argument.
+218 
+219        ll     (ell-ell).   A  following integer conversion corresponds to a
+220               long long int or unsigned long long int argument, or  a  fol
+221               lowing  n  conversion corresponds to a pointer to a long long
+222               int argument.
+223 
+224        q      A synonym for ll.  This is a nonstandard  extension,  derived
+225               from BSD; avoid its use in new code.
+226 
+227        L      A  following a, A, e, E, f, F, g, or G conversion corresponds
+228               to a long double argument.  (C99 allows %LF, but  SUSv2  does
+229               not.)
+230 
+231        j      A  following integer conversion corresponds to an intmax_t or
+232               uintmax_t argument, or a following n  conversion  corresponds
+233               to a pointer to an intmax_t argument.
+234 
+235        z      A  following  integer  conversion  corresponds to a size_t or
+236               ssize_t argument, or a following n conversion corresponds  to
+237               a pointer to a size_t argument.
+238 
+240               z.  Do not use in new code.
+241 
+242        t      A following integer conversion  corresponds  to  a  ptrdiff_t
+243               argument,  or  a  following  n  conversion  corresponds  to a
+244               pointer to a ptrdiff_t argument.
+245 
+247        itly  noted  as  being nonstandard extensions.  SUSv2 specified only
+250 
+252        as synonyms, so that one can, for example, write llg (as  a  synonym
+254        dards compliant lld).  Such usage is nonportable.
+255 
+256    Conversion specifiers
+259 
+264               sion  is  1.  When 0 is printed with an explicit precision 0,
+266 
+267        o, u, x, X
+276 
+285 
+291               character  appears.  If a decimal point appears, at least one
+292               digit appears before it.
+293 
+300 
+308               decimal point appears only if it is followed by at least  one
+309               digit.
+310 
+312               double argument is converted to hexadecimal  notation  (using
+322               but otherwise unspecified for normalized numbers.
+323 
+330 
+332               expected to be a  pointer  to  an  array  of  character  type
+334               up to (but not including) a terminating null byte ('\0');  if
+336               are written.  If a precision is given, no null byte  need  be
+339               nating null byte.
+340 
+342               expected to be a pointer to  an  array  of  wide  characters.
+350               ified are written, but no partial  multibyte  characters  are
+357 
+359               for lc.  Don't use.
+360 
+362               for ls.  Don't use.
+363 
+365               by %#x or %#lx).
+366 
+370               (optionally) supplied integer length modifier.   No  argument
+373               specification  includes any flags, a field width, or a preci
+374               sion.
+375 
+377               put of strerror(errno).  No argument is required.
+378 
+380               conversion specification is '%%'.
+381 
+382 RETURN VALUE
+385        strings).
+386 
+393        cated.  (See also below under NOTES.)
+394 
+395        If an output error is encountered, a negative value is returned.
+396 
+397 ATTRIBUTES
+399        attributes(7).
+400 
+401        +------------------------+---------------+----------------+
+402        |Interface               | Attribute     | Value          |
+403        +------------------------+---------------+----------------+
+404        |printf(), fprintf(),    | Thread safety | MT-Safe locale |
+405        |sprintf(), snprintf(),  |               |                |
+406        |vprintf(), vfprintf(),  |               |                |
+407        |vsprintf(), vsnprintf() |               |                |
+408        +------------------------+---------------+----------------+
+409 
+410 CONFORMING TO
+411        fprintf(),  printf(),  sprintf(), vprintf(), vfprintf(), vsprintf():
+412        POSIX.1-2001, POSIX.1-2008, C89, C99.
+413 
+414        snprintf(), vsnprintf(): POSIX.1-2001, POSIX.1-2008, C99.
+415 
+417        sions that were later standardized in POSIX.1-2008.
+418 
+420        each other: when snprintf() is called with size=0 then SUSv2  stipu
+421        lates  an unspecified return value less than 1, while C99 allows str
+425        their specification of snprintf() with C99.
+426 
+429 
+432 
+433 NOTES
+435 
+436            sprintf(buf, "%s some further text", buf);
+437 
+443        results.
+444 
+447        since glibc version 2.1.  Until glibc 2.0.6, they  would  return  -1
+449 
+450 BUGS
+456        vasprintf(3)).
+457 
+458        Code such as printf(foo); often indicates a bug, since foo may  con
+459        tain  a % character.  If foo comes from untrusted user input, it may
+461        ing a security hole.
+462 
+463 EXAMPLE
+464        To print Pi to five decimal places:
+465 
+466            #include <math.h>
+467            #include <stdio.h>
+468            fprintf(stdout, "pi = %.5f\n", 4 * atan(1.0));
+469 
+472 
+473            #include <stdio.h>
+474            fprintf(stdout, "%s, %s %d, %.2d:%.2d\n",
+475                    weekday, month, day, hour, min);
+476 
+480 
+481            #include <stdio.h>
+482            fprintf(stdout, format,
+483                    weekday, month, day, hour, min);
+484 
+487 
+488            "%1$s, %3$d. %2$s, %4$d:%5$.2d\n"
+489 
+490        one might obtain "Sonntag, 3. Juli, 10:02".
+491 
+494 
+495        #include <stdio.h>
+496        #include <stdlib.h>
+497        #include <stdarg.h>
+498 
+499        char *
+500        make_message(const char *fmt, ...)
+501        {
+502            int size = 0;
+503            char *p = NULL;
+504            va_list ap;
+505 
+506            /* Determine required size */
+507 
+508            va_start(ap, fmt);
+509            size = vsnprintf(p, size, fmt, ap);
+510            va_end(ap);
+511 
+512            if (size < 0)
+513                return NULL;
+514 
+515            size++;             /* For '\0' */
+516            p = malloc(size);
+517            if (p == NULL)
+518                return NULL;
+519 
+520            va_start(ap, fmt);
+521            size = vsnprintf(p, size, fmt, ap);
+522            va_end(ap);
+523 
+524            if (size < 0) {
+525                free(p);
+526                return NULL;
+527            }
+528 
+529            return p;
+530        }
+531 
+532        If truncation occurs in glibc  versions  prior  to  2.0.6,  this  is
+533        treated as an error instead of being handled gracefully.
+534 
+535 SEE ALSO
+536        printf(1),   asprintf(3),   puts(3),  scanf(3),  setlocale(3),  str
+537        fromd(3), wcrtomb(3), wprintf(3), locale(5)
+538 
+539 COLOPHON
+543        https://www.kernel.org/doc/man-pages/.
+544 
+545 GNU                              2017-09-15                       PRINTF(3)

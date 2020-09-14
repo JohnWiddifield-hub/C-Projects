@@ -1,0 +1,12 @@
+For this project,
+you get to write
+a program called
+`select`.  This
+program will read
+a text file and
+then print out
+selected lines from
+the file, based
+on command-line
+options given by
+the user.

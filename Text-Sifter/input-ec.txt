@@ -1,0 +1,10 @@
+If you do the extra credit,
+your program can handle words
+like it's.  Words that are
+inside 'quotes' will still match,
+even a word like 'it's' that has
+an apostrophe and is inside quotes.
+
+You can match a word like "we'll",
+where the apostrophe isn't the
+second-to-last character.

@@ -1,0 +1,10 @@
+cookie gb Granola Bars
+cookie at Apple Tarts
+cookie hs Huckleberry Shortbread
+cookie bb Berry Bites
+cookie exch Extra Chewy Chunks
+cookie ccc Cherry Crunch Cringles
+cookie dcd Dark Chocolate Delites
+cookie fb Fig Bars
+cookie ic Icicle Cookies
+list cookies

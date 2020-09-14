@@ -1,0 +1,6 @@
+usage: select ( [-lines <start> <end>]
+                [+lines <start> <end>]
+                [-pat <string>]
+                [+pat <string>]
+                [-word <string>]
+                [+word <string>] )* <text-file>

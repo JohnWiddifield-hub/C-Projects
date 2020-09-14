@@ -1,0 +1,6 @@
+scout ams Anna Mary Smith
+scout bb Betty Brooks
+scout cd Clare Dominguez
+scout dp Donna Patel
+scout ef Ellen Ferris
+list troop

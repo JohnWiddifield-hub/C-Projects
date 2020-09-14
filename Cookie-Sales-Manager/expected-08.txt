@@ -1,0 +1,14 @@
+1> 
+2> 
+3> 
+4> 
+5> 
+6> 
+ID         Name                          Boxes Sold
+ams        Anna Mary Smith                        0
+bb         Betty Brooks                           0
+cd         Clare Dominguez                        0
+dp         Donna Patel                            0
+ef         Ellen Ferris                           0
+Total                                             0
+7> 

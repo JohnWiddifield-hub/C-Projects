@@ -1,0 +1,52 @@
+1> 
+2> 
+3> 
+4> 
+5> 
+6> 
+7> 
+8> 
+9> 
+10> 
+11> 
+12> 
+13> 
+14> 
+15> 
+16> 
+17> 
+18> 
+19> 
+20> 
+21> 
+22> 
+23> 
+24> 
+25> 
+26> 
+27> 
+28> 
+ID         Name                          Boxes Sold
+bb         Berry Bites                            6
+gb         Granola Bars                           5
+hs         Huckleberry Shortbread                 1
+ic         Icicle Cookies                         5
+Total                                            17
+29> 
+ID         Name                          Boxes Sold
+at         Apple Tarts                            7
+gb         Granola Bars                           3
+Total                                            10
+30> 
+ID         Name                          Boxes Sold
+at         Apple Tarts                            2
+exch       Extra Chewy Chunks                     7
+Total                                             9
+31> 
+ID         Name                          Boxes Sold
+dcd        Dark Chocolate Delites                 2
+exch       Extra Chewy Chunks                     5
+fb         Fig Bars                               5
+gb         Granola Bars                           5
+Total                                            17
+32> 

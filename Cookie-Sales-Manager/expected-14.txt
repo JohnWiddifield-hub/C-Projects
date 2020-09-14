@@ -1,0 +1,104 @@
+1> 
+2> 
+3> 
+4> 
+5> 
+6> 
+7> 
+8> 
+ID         Name                          Boxes Sold
+jb         Jenny Baxter                           0
+jj         Josie Jones                            0
+sp         Sarah Patel                            0
+Total                                             0
+9> 
+10> 
+11> 
+12> 
+13> 
+Invalid command
+14> 
+15> 
+Invalid command
+16> 
+ID         Name                          Boxes Sold
+at         Apple Tarts                            0
+bb         Berry Bites                            0
+ccc        Cherry Crunch Cringles                 0
+exb        Excellent Bars                         0
+exch       Extra Chewy Chunks                     0
+gd         Goodberry Delite                       0
+gb         Granola Bars                           3
+hs         Huckleberry Shortbread                 0
+Total                                             3
+17> 
+18> 
+19> 
+20> 
+21> 
+22> 
+Invalid command
+23> 
+24> 
+25> 
+Invalid command
+26> 
+Invalid command
+27> 
+28> 
+29> 
+ID         Name                          Boxes Sold
+bb         Berry Bites                            6
+gb         Granola Bars                           5
+Total                                            11
+30> 
+31> 
+32> 
+33> 
+34> 
+35> 
+36> 
+ID         Name                          Boxes Sold
+bb         Berry Bites                            6
+gb         Granola Bars                           5
+hs         Huckleberry Shortbread                 1
+ic         Icicle Cookies                         3
+Total                                            15
+37> 
+ID         Name                          Boxes Sold
+at         Apple Tarts                            7
+gb         Granola Bars                           6
+Total                                            13
+38> 
+ID         Name                          Boxes Sold
+at         Apple Tarts                            2
+exch       Extra Chewy Chunks                     7
+Total                                             9
+39> 
+ID         Name                          Boxes Sold
+exch       Extra Chewy Chunks                     5
+fb         Fig Bars                               4
+gb         Granola Bars                           5
+Total                                            14
+40> 
+ID         Name                          Boxes Sold
+at         Apple Tarts                            9
+bb         Berry Bites                            6
+ccc        Cherry Crunch Cringles                 0
+dcd        Dark Chocolate Delites                 0
+exb        Excellent Bars                         0
+exch       Extra Chewy Chunks                    12
+fb         Fig Bars                               4
+gd         Goodberry Delite                       0
+gb         Granola Bars                          16
+hs         Huckleberry Shortbread                 1
+ic         Icicle Cookies                         3
+Total                                            51
+41> 
+ID         Name                          Boxes Sold
+jb         Jenny Baxter                          15
+jj         Josie Jones                           14
+sp         Sarah Patel                           13
+amb        Anna Marie Bradley                     9
+Total                                            51
+42> 

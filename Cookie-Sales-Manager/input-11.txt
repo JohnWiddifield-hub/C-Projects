@@ -1,0 +1,29 @@
+cookie gb Granola Bars
+cookie at Apple Tarts
+cookie hs Huckleberry Shortbread
+cookie bb Berry Bites
+cookie exch Extra Chewy Chunks
+cookie ccc Cherry Crunch Cringles
+cookie dcd Dark Chocolate Delites
+cookie fb Fig Bars
+cookie ic Icicle Cookies
+scout jb Jenny Baxter
+scout sp Sarah Patel
+scout amb Anna Marie Bradley
+scout jj Josie Jones
+sale sp gb 3
+sale jb ic 2
+sale jj fb 1
+sale jb gb 5
+sale amb at 2
+sale jb bb 6
+sale amb exch 7
+sale jj dcd 2
+sale jb hs 1
+sale jj fb 4
+sale jj exch 5
+sale jj gb 5
+sale jb ic 3
+sale sp at 7
+list cookies
+quit
